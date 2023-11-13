@@ -1,0 +1,8 @@
+Instalar EF con el comando
+	dotnet tool install --global dotnet-ef
+
+Realizar las migraciones
+	dotnet ef migrations add FirstMigration 
+	
+Creamos las tablas
+	dotnet ef database update

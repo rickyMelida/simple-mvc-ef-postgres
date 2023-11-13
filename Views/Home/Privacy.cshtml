@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@model mvc_app_ef.Models.Student
+<h1>@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-primary" role="alert">
+                @ViewBag.message
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Privacy">
+                <div class="form-group">
+                    <label asp-for="Lastname">@Html.DisplayNameFor(model => model.Lastname)</label>
+                    <input type="text" asp-for="Lastname" class="form-control" id="lastname">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Firstmidname">@Html.DisplayNameFor(model => model.Firstmidname)</label>
+                    <input type="text" asp-for="Firstmidname" class="form-control" id="firstmidname">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Enrollmentdate">@Html.DisplayNameFor(model => model.Enrollmentdate)</label>
+                    <input type="date" asp-for="Enrollmentdate" class="form-control" id="enrollmentdate">
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Agregar</button>
+            </form>
+        </div>
+    </div>
+</div>
