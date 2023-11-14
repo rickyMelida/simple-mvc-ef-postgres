@@ -10,17 +10,18 @@ namespace mvc_app_ef.Controllers;
 public class HomeController : Controller
 {
     private readonly AppDbContext _appDbContext;
+    private readonly OracleDbContext _oracleDbContext;
     public List<Student> students = new List<Student>();
 
-    public HomeController(AppDbContext appDbContext)
+    public HomeController(OracleDbContext oracleDbContext)
     {
-        _appDbContext = appDbContext;
+        _oracleDbContext = oracleDbContext;
     }
 
     public async Task<IActionResult> Index()
     {
         //var sts = GetStudents();
-        var sts = await _appDbContext.Students.ToListAsync();
+        var sts = await _oracleDbContext.Students.ToListAsync();
         return View(sts);
     }
 
@@ -37,8 +38,8 @@ public class HomeController : Controller
             // Ajusta el Kind a Utc
             student.Enrollmentdate = DateTime.SpecifyKind(student.Enrollmentdate, DateTimeKind.Utc);
 
-            _appDbContext.Add(student);
-            await _appDbContext.SaveChangesAsync();
+            _oracleDbContext.Add(student);
+            await _oracleDbContext.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

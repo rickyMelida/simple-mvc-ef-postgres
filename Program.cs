@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using mvc_app_ef.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection"))
+);
+builder.Services.AddDbContext<OracleDbContext>(options =>
+    options.UseOracle(builder.Configuration.GetConnectionString("OracleConnection"))
 );
 
 var app = builder.Build();
