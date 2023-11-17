@@ -13,15 +13,15 @@ public class HomeController : Controller
     private readonly OracleDbContext _oracleDbContext;
     public List<Student> students = new List<Student>();
 
-    public HomeController(AppDbContext appDbContext)
+    public HomeController(OracleDbContext oracleDbContext)
     {
-        _appDbContext = appDbContext;
+        _oracleDbContext = oracleDbContext;
     }
 
     public async Task<IActionResult> Index()
     {
         //var sts = GetStudents();
-        var sts = await _appDbContext.Students.ToListAsync();
+        var sts = await _oracleDbContext.Students.ToListAsync();
         return View(sts);
     }
 
@@ -49,9 +49,9 @@ public class HomeController : Controller
 
     public IActionResult Details()
     {
-        var data = from s in _appDbContext.Students
-                   join c in _appDbContext.Courses
-                   on s.Id equals c.Id
+        var data = from s in _oracleDbContext.Students
+                   join c in _oracleDbContext.Courses
+                   on s.CourseId equals c.Id
                    select new
                    {
                        s.Id,
@@ -62,11 +62,13 @@ public class HomeController : Controller
                    };
 
         ViewBag.Data = data.ToList();
+        
         ViewBag.Resultado = new List<object>
         {
             new { Id = 1, Lastname = "Rick", Firstmidname = "Melida", Enrollmentdate = DateTime.Now.ToString(), Course = "Math" } ,
             new { Id = 2, Lastname = "Oscar", Firstmidname = "Noguera", Enrollmentdate = DateTime.Now.ToString(), Course = "Biologic" }
         }.ToList();
+
         return View();
     }
 

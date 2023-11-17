@@ -27,10 +27,5 @@ namespace mvc_app_ef.Data
                 entity.Property(e => e.Duration).HasColumnName("DURATION");
             });
         }
-
-
-
-
-
     }
 }

@@ -1,6 +1,6 @@
 @{
     ViewData["Title"] = "Home Page";
-    var result = ViewBag.Resultado;
+    var result = ViewBag.Data;
 }
 
 @model IEnumerable<mvc_app_ef.Models.Student>
@@ -37,7 +37,7 @@
                                 <td>@element.Firstmidname</td>
                                 <td>@element.Lastname</td>
                                 <td>@element.Enrollmentdate</td>
-                                <td>@element.Course</td>
+                                <td>@element.Name</td>
                             </tr>
                         }
                     </tbody>
