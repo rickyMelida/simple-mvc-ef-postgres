@@ -13,6 +13,22 @@ namespace mvc_app_ef.Data
         }
 
         public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses {get; set;}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Course>(entity => 
+            {
+                entity.ToTable("COURSES", "PUBLIC");
+                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.Name).HasColumnName("NAME");
+                entity.Property(e => e.Duration).HasColumnName("DURATION");
+            });
+        }
+
+
 
 
 

@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Home Page";
+    var result = ViewBag.Resultado;
+}
+
+@model IEnumerable<mvc_app_ef.Models.Student>
+
+<div class="container">
+
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="display-4">Welcome</h1>
+                <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Firstmidname</th>
+                            <th scope="col">Lastname</th>
+                            <th scope="col">Enrollmentdate</th>
+                            <th scope="col">Course</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var element in result)
+                        {
+                            <tr>
+                                <th scope="row">@element.Id</th>
+                                <td>@element.Firstmidname</td>
+                                <td>@element.Lastname</td>
+                                <td>@element.Enrollmentdate</td>
+                                <td>@element.Course</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

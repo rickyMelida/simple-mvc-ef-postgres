@@ -13,15 +13,15 @@ public class HomeController : Controller
     private readonly OracleDbContext _oracleDbContext;
     public List<Student> students = new List<Student>();
 
-    public HomeController(OracleDbContext oracleDbContext)
+    public HomeController(AppDbContext appDbContext)
     {
-        _oracleDbContext = oracleDbContext;
+        _appDbContext = appDbContext;
     }
 
     public async Task<IActionResult> Index()
     {
         //var sts = GetStudents();
-        var sts = await _oracleDbContext.Students.ToListAsync();
+        var sts = await _appDbContext.Students.ToListAsync();
         return View(sts);
     }
 
@@ -47,6 +47,29 @@ public class HomeController : Controller
         return View(student);
     }
 
+    public IActionResult Details()
+    {
+        var data = from s in _appDbContext.Students
+                   join c in _appDbContext.Courses
+                   on s.Id equals c.Id
+                   select new
+                   {
+                       s.Id,
+                       s.Firstmidname,
+                       s.Lastname,
+                       s.Enrollmentdate,
+                       c.Name
+                   };
+
+        ViewBag.Data = data.ToList();
+        ViewBag.Resultado = new List<object>
+        {
+            new { Id = 1, Lastname = "Rick", Firstmidname = "Melida", Enrollmentdate = DateTime.Now.ToString(), Course = "Math" } ,
+            new { Id = 2, Lastname = "Oscar", Firstmidname = "Noguera", Enrollmentdate = DateTime.Now.ToString(), Course = "Biologic" }
+        }.ToList();
+        return View();
+    }
+
     public List<Student> GetStudents()
     {
         List<Student> students = new List<Student>();
@@ -58,6 +81,7 @@ public class HomeController : Controller
 
         return students;
     }
+
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
